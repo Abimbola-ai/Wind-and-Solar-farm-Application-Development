@@ -1,9 +1,0 @@
-weather.py - Collect weather data to weather_forecast.csv
-merge.py - append new data to old data
-predict.py - Predict the new data for wind and solar
-app.py -  create a flask application that uploads csv to the database and interacts with the predicted data
-automate.py - perform updates of the power output using SQL
-dashboard.py  - create dashboard
-test_whatsapp.py - twilio sms sending (sms.py is under construction)
-Docker - create a docker to create a flow of the entire python script
-include this in readme

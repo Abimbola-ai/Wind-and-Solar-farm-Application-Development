@@ -6,22 +6,22 @@ import pandas as pd
 from datetime import datetime
 import time, calendar
 
-apikey = "59394d25f1a78085f076c9d0ab6cf23c"
-lat = 6.4474
-long = 3.3903
-#IP_url = "http://ip-api.com/json"
+apikey = os.environ.get('apikey')
+lat = 19.9208
+long = 142.1582
+
 
 coord_API_endpoint = "https://api.openweathermap.org/data/2.5/onecall?"
 lat_long = "lat=" + str(lat)+ "&lon=" + str(long)
 join_key = "&exclude=current,minutely,hourly&appid=" + apikey
-units = "&units=metric"
+units = "&units=imperial"
 forecast_coord_weather_url= coord_API_endpoint + lat_long + join_key + units
 #print(forecast_coord_weather_url)
 
 json_data = requests.get(forecast_coord_weather_url).json()
-print(json_data)
+#print(json_data)
 
-weather = pd.DataFrame() #Create an empty dataframe
+weather_solar = pd.DataFrame() #Create an empty dataframe
 
 
 # Create an empty list to store in the DF
@@ -35,48 +35,36 @@ Temp_Low = []
 Solar = []
 Cloud = []
 Rainfall = []
-windspeed = []
-Direction = []
 
 #Add json data to the list
 for num_forecasts in json_data['daily']:
-    weather['prediction_num'] = prediction_num
+    weather_solar['prediction_num'] = prediction_num
     list_pred_num.append(prediction_num)
     datetime.append(json_data['daily'][prediction_num]['dt'])
-    #if json_data['city']['timezone'] >0:
-        #timezone.append(("+" +str((json_data['city']['timezone'])/3600)))
-    #else:
-        #timezone.append(((json_data['city']['timezone'])/3600))
     Temp_Hi.append(json_data['daily'][prediction_num]['temp']['max'])
     Temp_Low.append(json_data['daily'][prediction_num]['temp']['min'])
     Cloud.append(json_data['daily'][prediction_num]['clouds'])
-    windspeed.append(json_data['daily'][prediction_num]['wind_speed'])
-    Direction.append(json_data['daily'][prediction_num]['wind_deg'])
     Solar.append(json_data['daily'][prediction_num]['uvi'])
     #Rainfall.append(json_data['daily'][prediction_num]['rain'])
     prediction_num += 1
 
 #Write list to DF
-weather['prediction_num'] = list_pred_num
-weather['datetime'] = datetime
-weather['Temp_Hi'] = Temp_Hi
-weather['Temp_Low'] = Temp_Low
-weather['Cloud'] = Cloud
-weather['Solar'] = Solar
-weather['windspeed'] = windspeed
-weather['Direction'] = Direction
-#weather['Rainfall'] = Rainfall
+weather_solar['prediction_num'] = list_pred_num
+weather_solar['datetime'] = datetime
+weather_solar['Temp_Hi'] = Temp_Hi
+weather_solar['Temp_Low'] = Temp_Low
+weather_solar['Cloud'] = Cloud
+weather_solar['Solar'] = Solar
+#weather_solar['Rainfall'] = Rainfall
 
 
 # Convert timestamp to datetime
-weather['datetime'] = pd.to_datetime(weather['datetime'], unit='s')
-weather['Day'] = weather['datetime'].dt.day 
-weather['Month'] = weather['datetime'].dt.month
-#weather['Month'] = calendar.month_name(weather['Month'])
-weather.to_csv('new_weather_forecast.csv')
+weather_solar['datetime'] = pd.to_datetime(weather_solar['datetime'], unit='s')
+weather_solar['Day'] = weather_solar['datetime'].dt.day 
+weather_solar['Month'] = weather_solar['datetime'].dt.month
+weather_solar['Cloud'] = weather_solar['Cloud']/12.5
+#weather_solar['Month'] = calendar.month_name(weather_solar['Month'])
+#weather_solar.to_csv('new_solar_weather_forecast.csv')
 
-#print(weather.head())
+#print(weather_solar)
 #print(len(weather))
-
-
-
