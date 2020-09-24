@@ -38,6 +38,8 @@ def init_dashboard(server):
     trace2 = go.Bar(x=branches,y = Solar_Output, name = 'Solar')
     trace3 = go.Bar(x=branches,y = Total_Output, name = 'Wind and Solar')
 
+    #styles = get_styles()
+    
     data = [trace1, trace2]
     layout = go.Layout(barmode = 'group',xaxis_title="Day of the month", yaxis_title="Power Generated in MW")
     fig = go.Figure(data = data, layout = layout)
@@ -49,6 +51,7 @@ def init_dashboard(server):
     )
 
     dash_app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
+        html.A("Go to Home Page", href="/", style={'display':'block', 'padding':'5', 'background-color':'#111111'}),
         html.H1(
             children='Hello George',
             style={
