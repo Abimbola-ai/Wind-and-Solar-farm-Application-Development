@@ -34,3 +34,5 @@ The following task were carried out:
 
 ### Instructions 
 Clone Repsoitory and then run wsgi.py
+
+* wsgi.py -  Application entry point for the entire application Development
