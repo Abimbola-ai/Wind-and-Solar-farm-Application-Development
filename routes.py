@@ -13,6 +13,10 @@ from merge import weather
 def welcome():
     return render_template('home.html')
 
+@app.route('/architecture')
+def archi():
+    return render_template('architecture.html')
+
 @app.route('/GetWeatherData',methods = ['GET', 'POST'])
 def mergedboth():
     return render_template('weather_data.html', tables=[weather.to_html(classes='data', index=False)], titles = ['na', 'Weather Data'])
