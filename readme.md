@@ -1,4 +1,4 @@
-### Application Development
+### Application Development for Abimbola Ojikutu
 This project predicts the output power for a client that has both solar and wind power plants. 
 
 Both these farms feed their output electrical energy to the local grid where they are located. Our aim is to produce an application that is able to predict the amount of power we expect to generate on a day in the near future in order to provide this information to the grid operator. The information to be used to generate this model will include:
