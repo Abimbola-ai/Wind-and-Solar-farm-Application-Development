@@ -6,15 +6,16 @@ from twilio.rest import Client
 import os
 from datetime import datetime
 
-#Read in uploaded maintenance data
-wind_data = pd.read_csv('~/Documents/AIIP/AppDev/Summative/Uploads/wind_farm.csv', index_col=None)
-solar_data = pd.read_csv('~/Documents/AIIP/AppDev/Summative/Uploads/solar_farm.csv', index_col=None)
+#Read in uploaded maintenance data, use your computer directory below
+wind_data = pd.read_csv('~/Documents/Learning/Wind-and-Solar-farm-Application-Development/Uploads/wind_farm.csv', index_col=None)
+solar_data = pd.read_csv('~/Documents/Learning/Wind-and-Solar-farm-Application-Development/Uploads/solar_farm.csv', index_col=None)
 
 
 # Rename the columns of both dataframe
 wind_data_renamed = wind_data.rename(columns = {'Date Of Month': 'Day', 'Capacity Available as %': 'Capacity'}, inplace = False)
 solar_data_renamed = solar_data.rename(columns = {'Date Of Month': 'Day', 'Capacity Available': 'Capacity'}, inplace = False)
 
+#print(wind_data_renamed)
 ### WIND DATA
 new_wind = pd.merge(round_data, wind_data_renamed, on=['Day'])
 new_wind['Predicted_WindFarm_Output(MW)'] = new_wind['Predicted_WindFarm_Output(MW)'] * new_wind['Capacity'] /100
@@ -66,16 +67,16 @@ final_merged_data['Total_MW'] = (final_merged_data['SolarFarm_Output(MW)'] + fin
 #final_merged_data.to_csv('final_merged_data.csv')
 less_data = final_merged_data[(final_merged_data.Total_MW <= 4.0)]
 
-account_sid = os.environ.get('account_sid')
-auth_token = os.environ.get('auth_token')
+account_sid = "xxxx" #input twilio account SID
+auth_token = "yyyy" #input twilio auth token
 
 client = Client(account_sid, auth_token)
 
 def send_message2(message2):
     message2 = client.messages.create(
-        from_='whatsapp:+14155238886',
+        from_='whatsapp:+14155238886',  #use twilio number
         body=message2, 
-        to='whatsapp:+2348106061236')
+        to='whatsapp:+2348106061236') #use your number
     return message2
 
 current_timestamp = str(datetime.now())

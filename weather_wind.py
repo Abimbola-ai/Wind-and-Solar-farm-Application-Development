@@ -6,21 +6,19 @@ import pandas as pd
 from datetime import datetime
 import time, calendar
 
-apikey = os.environ.get('apikey')
-lat = 8.598084
-long = 53.556563
-#IP_url = "http://ip-api.com/json"
+#apikey = os.environ.get('apikey')
+lat = 27.9881
+long = 86.9250
+
 
 coord_API_endpoint = "https://api.openweathermap.org/data/2.5/onecall?"
 lat_long = "lat=" + str(lat)+ "&lon=" + str(long)
-join_key = "&exclude=current,minutely,hourly&appid=" + apikey
-units = "&units=metric"
+join_key = "&exclude=hourly&appid=" + "xxxxx" #input your api key in xxxxx
+units = "&units=imperial"
 forecast_coord_weather_url= coord_API_endpoint + lat_long + join_key + units
 #print(forecast_coord_weather_url)
 
 json_data = requests.get(forecast_coord_weather_url).json()
-#print(json_data)
-
 weather_wind = pd.DataFrame() #Create an empty dataframe
 
 

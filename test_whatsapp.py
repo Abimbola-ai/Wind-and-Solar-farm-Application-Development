@@ -11,8 +11,8 @@ from datetime import datetime
 #print(less_data)
 # Your Account Sid and Auth Token from twilio.com/console
 # DANGER! This is insecure. See http://twil.io/secure
-account_sid = os.environ.get('account_sid')
-auth_token = os.environ.get('auth_token')
+account_sid = "xxxx" #input twilio account SID
+auth_token = "yyyy" #input twilio auth token
 
 client = Client(account_sid, auth_token)
 

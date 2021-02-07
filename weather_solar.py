@@ -6,19 +6,20 @@ import pandas as pd
 from datetime import datetime
 import time, calendar
 
-apikey = os.environ.get('apikey')
-lat = 19.9208
-long = 142.1582
+#apikey = os.environ.get('apikey') # get your api key
+lat = 25.2048
+long = 55.2708
 
 
 coord_API_endpoint = "https://api.openweathermap.org/data/2.5/onecall?"
 lat_long = "lat=" + str(lat)+ "&lon=" + str(long)
-join_key = "&exclude=current,minutely,hourly&appid=" + apikey
+join_key = "&exclude=current,minutely,hourly&appid=" + "xxxxx" #input your api key in xxxxx
 units = "&units=imperial"
 forecast_coord_weather_url= coord_API_endpoint + lat_long + join_key + units
 #print(forecast_coord_weather_url)
 
 json_data = requests.get(forecast_coord_weather_url).json()
+
 #print(json_data)
 
 weather_solar = pd.DataFrame() #Create an empty dataframe
