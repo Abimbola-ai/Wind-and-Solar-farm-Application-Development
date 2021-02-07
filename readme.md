@@ -33,6 +33,6 @@ The following task were carried out:
 * wsgi.py -  Application entry point for the entire application Development
 
 ### Instructions 
-Clone Repsoitory and then run wsgi.py
-
+Clone Repository and then run wsgi.py
+* pip3 install -r requirements.txt
 * wsgi.py -  Application entry point for the entire application Development
